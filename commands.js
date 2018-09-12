@@ -2,7 +2,7 @@ const fs = require("fs");
 
 //write out data
 function done(output) {
-    process.stdout.write(output);
+    process.stdout.write('' + output);
     process.stdout.write('\nprompt > ');
 }
 
@@ -45,10 +45,10 @@ const commandLibrary = {
     fs.readFile(file, (err, data) => {
         if (err) throw err;
         data.toString().split('\n');
-        let n = 10;
         let tempArr = [];
-        for (var i = 0; i > n; i++) {
-          tempArr.push(i);
+        let n = 10;
+        for (var i = 0; i < n; i++) {
+          tempArr.push(data);
         }
         data = tempArr;
         done(data);
