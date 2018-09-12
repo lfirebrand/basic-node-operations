@@ -22,6 +22,10 @@ function evaluateCmd(userInput) {
         break;
       case "head":
         commandLibrary.head(userInputArray.slice(1));
+      case "tail":
+        commandLibrary.tail(userInputArray.slice(1));
+      default:
+        done('\x1b[31m\x1b[5mCommand does not exist' + '\n\x1b[0mAvailable commands are:\necho\ncat\nhead\ntail');
      }
 }
 
@@ -44,16 +48,33 @@ const commandLibrary = {
     const file = path[0];
     fs.readFile(file, (err, data) => {
         if (err) throw err;
-        data.toString().split('\n');
+        const docArr = data.toString().split('\n');
         let tempArr = [];
-        let n = 10;
+        const n = 5;
         for (var i = 0; i < n; i++) {
-          tempArr.push(data);
+          docArr[i] = docArr[i].replace(',', (i + 1)) + '\n';
+          tempArr.push(docArr[i]);
         }
-        data = tempArr;
-        done(data);
+        done(tempArr);
     });
-  }
+  },
+
+  "tail": function(path) {
+    const file = path[0];
+    fs.readFile(file, (err, data) => {
+        if (err) throw err;
+        const docArr = data.toString().split('\n');
+        let tempArr = [];
+        const s = docArr.length - 6;
+        const n = docArr.length - 1;
+        for (var i = s; i < n; i++) {
+        docArr[i] = docArr[i].replace(',', i + 1) + '\n';
+        tempArr.push(docArr[i]);
+      }
+      done(tempArr);
+  });
+},
+
 };
 
 module.exports.commandLibrary = commandLibrary;
