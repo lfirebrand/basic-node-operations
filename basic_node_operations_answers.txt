@@ -1,0 +1,16 @@
+1. Run the commands sort, wc and uniq on the commands.js file. Explain how they work and what the output was.
+
+a. The sort command sorted the contents of the file, line by line. The output resulted in similar lines grouped together, such as:
+        		commandLibrary.cat(userInputArray.slice(1));
+        		commandLibrary.head(userInputArray.slice(1));
+
+b. wc printed out the lines, words and characters in commands.js: 
+60     162    1498 commands.js
+
+c. uniq filters out repeated adjacent lines. The resulting output was that any repeated lines of code were removed.
+
+2. Using the pipe (|) connect at least two commands and run it on commands.js. Explain what the output was and why the specific data was outputted.
+
+sort commands.js | uniq
+
+The output was all of the lines were sorted alphabetically and then any duplicates were removed. This removed blank lines at the beginning of commands.js and any repeated lines of code, only returning unique lines in sorted order.
